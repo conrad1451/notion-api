@@ -18,7 +18,8 @@ closeFormButton.addEventListener("click", () => {
   addUserFormContainer.style.display = "none";
 });
 
-// Add data to HTML
+// CHQ: Displays the data from the database in the front-end portion
+//      of the app
 const addData = async () => {
   const data = await getDataFromBackend();
 
@@ -29,6 +30,9 @@ const addData = async () => {
         <h3>${value.name}</h3>
         <p>${value.role}</p>
     `;
+
+    // console.error(value.name);
+    // alert(value.name);
 
     container.append(div);
   });
