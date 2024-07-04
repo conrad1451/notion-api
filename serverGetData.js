@@ -14,6 +14,11 @@ const port = 8000;
 
 const app = express();
 
+app.get("/", async (req, res) => {
+  res.redirect("/users");
+  res.end();
+});
+
 // CHQ: Reads all data entries from the database (Read)
 app.get("/users", async (req, res) => {
   const users = await getDatabase();
