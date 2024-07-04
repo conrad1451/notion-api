@@ -26,17 +26,25 @@ app.get("/users", async (req, res) => {
   const users = await getDatabase();
   res.json(users);
 });
-{
-  /* <form method="POST" action="/lalala" id="addUserForm"> */
-}
-// app.post("/lalala", async (req, res) => {
 
-// the two lines above determine the address to which the app
-// writes new entries. I changed the app post and tried to post
-// the entry but it said "cannot post /lalala" here and
-// nothing updated in Notion table
-// but what if I swap it with a real but different endpoint?
 // CHQ: Posts a new entry to the database (Create)
+
+// CHQ: Here is the structure of the app.post
+// app.post(serverAddress, async function)
+
+// This seems like a slight of hand almost. the form submitted the 
+// data to the serverAddress. It was as if the form were communicating 
+// with a server located at serverAddress, SENDING a POST request
+// to a server, which happens to be the server that this code in
+// server.js is running on. 
+
+// I tried to run this code on a PaaS but it didn't work because
+// that particular PaaS did not ALLOW ingress (data inflow) via
+// post requests in the way that I had attempted.
+
+// Notably, the original example code has the front end and backend
+// coupled together and so could skip having to set up a backend
+// that would receive post requests entirely.
 
 app.post("/submit-form", async (req, res) => {
   // app.post("/lalala", async (req, res) => {
@@ -44,7 +52,7 @@ app.post("/submit-form", async (req, res) => {
   const role = req.body.role;
   await newEntryToDatabase(name, role);
   // the changes here worked
-  // await newEntryToDatabase("ddd", "dsafdsaf");
+  // await newEntryToDatabase("testName", "testRole");
   res.redirect("/");
   res.end();
 });
