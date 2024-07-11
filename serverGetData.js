@@ -16,9 +16,9 @@ const app = express();
 
 
 
-
-const express = require("express");
-const app = express();
+// CHQ: already declared earlier
+// const express = require("express");
+// const app = express();
 // Set middleware of CORS
 app.use((req, res, next) => {
   res.setHeader(
