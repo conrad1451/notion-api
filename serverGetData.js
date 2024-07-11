@@ -15,6 +15,8 @@ const port = 8000;
 const app = express();
 
 
+// Source: 
+// https://community.render.com/t/no-access-control-allow-origin-header/12947
 
 // CHQ: already declared earlier
 // const express = require("express");
@@ -23,7 +25,7 @@ const app = express();
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    *
+    "https://react-api-use-test-2.vercel.app"
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
