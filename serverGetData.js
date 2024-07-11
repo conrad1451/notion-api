@@ -14,6 +14,55 @@ const port = 8000;
 
 const app = express();
 
+
+
+
+const express = require("express");
+const app = express();
+// Set middleware of CORS
+app.use((req, res, next) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    *
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization, X-Content-Type-Options, Accept, X-Requested-With, Origin, Access-Control-Request-Method, Access-Control-Request-Headers"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  res.setHeader("Access-Control-Allow-Private-Network", true);
+  //  Firefox caps this at 24 hours (86400 seconds). Chromium (starting in v76) caps at 2 hours (7200 seconds). The default value is 5 seconds.
+  res.setHeader("Access-Control-Max-Age", 7200);
+
+  next();
+});
+
+
+// Set preflight
+app.options("*", (req, res) => {
+  console.log("preflight");
+  if (
+    req.headers.origin === "https://badmintown.onrender.com" &&
+    allowMethods.includes(req.headers["access-control-request-method"]) &&
+    allowHeaders.includes(req.headers["access-control-request-headers"])
+  ) {
+    console.log("pass");
+    return res.status(204).send();
+  } else {
+    console.log("fail");
+  }
+})
+
+// health check
+app.get("/healthz", (req, res) => {
+  console.log("health check is processed");
+  return res.status(204).send();
+});
+
 app.get("/", async (req, res) => {
   res.redirect("/users");
   res.end();
