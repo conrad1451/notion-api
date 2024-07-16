@@ -6,6 +6,9 @@ const port = 8000;
 
 const app = express();
 
+// CHQ: express.static serves the html, javascript, and css files in the public folder. 
+//      THIS, when called from app.use, connnects the front and back ends of this
+//      notion application
 app.use(express.static("public"));
 app.use(
   express.urlencoded({
